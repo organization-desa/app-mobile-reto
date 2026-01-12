@@ -16,3 +16,4 @@ jobs:
       KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
       KEY_ALIAS_DEBUG: ${{ secrets.KEY_ALIAS_DEBUG }}
       KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      
