@@ -4,8 +4,8 @@ public class Calculator {
     
     public String GITHUB_TOKEN="ghp_1234567890abcdefghijklmnopqrstuvwxyz";
     
-    public String AWS_ACCESS_KEY_ID="AKIA1234567890ABCD";
-    
+    public String AWS_ACCESS_KEY_ID="AKIAIOSFODNN7EXAMPLE";
+
     public int add(int a, int b) {
         return a + b;
     }
