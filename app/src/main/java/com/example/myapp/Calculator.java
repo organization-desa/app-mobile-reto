@@ -2,9 +2,11 @@ package com.example.myapp;
 
 public class Calculator {
     
-    public String GITHUB_TOKEN="ghp_1234567890abcdefghijklmnopqrstuvwxyz";
+    String GITHUB_TOKEN="ghp_1234567890abcdefghijklmnopqrstuvwxyz";
     
-    public String AWS_ACCESS_KEY_ID="AKIAIOSFODNN7EXAMPLE";
+    String AWS_ACCESS_KEY_ID="AKIAIOSFODNN7EXAMPLE";
+
+    String token = "ghp_abcdefghijklmnopqrstuvwxyz1234567890";
 
     public int add(int a, int b) {
         return a + b;
