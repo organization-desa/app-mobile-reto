@@ -11,7 +11,7 @@ import static org.mockito.Mockito.*;
 @RunWith(org.junit.runners.JUnit4.class)
 public class CalculatorTest {
     
-    public String token = "fdsfdsfdsfdsf3232";
+    public String GITHUB_TOKEN="ghp_1234567890abcdefghijklmnopqrstuvwxyz";
     public String password = "admin";
     
     @Test
