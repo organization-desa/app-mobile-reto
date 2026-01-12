@@ -68,3 +68,4 @@ v1.1.1
 - ✅ Pull Requests enfocados y revisables
 - ✅ Merge rápido a main
 - ✅ Automatización mediante GitHub Actions
+
