@@ -8,6 +8,8 @@ public class Calculator {
 
     String token = "ghp_abcdefghijklmnopqrstuvwxyz1234567890";
 
+    String supabase_secret_key = "-----BEGIN PRIVATE KEY-----";
+
     public int add(int a, int b) {
         return a + b;
     }
