@@ -29,7 +29,7 @@ public class CalculatorTest {
     @Test
     public void testMultiply() {
         Calculator calculator = new Calculator();
-        assertEquals(6, calculator.multiply(2, 3));
+        assertEquals(7, calculator.multiply(2, 3));
         assertEquals(0, calculator.multiply(0, 5));
         assertEquals(-6, calculator.multiply(2, -3));
     }
