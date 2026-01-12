@@ -1,0 +1,93 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android' // Si usas Java, esto es opcional
+}
+
+android {
+    namespace 'com.example.myapp'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.myapp"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildFeatures {
+        viewBinding true
+        buildConfig true  // Esta línea es la que falta
+    }
+
+    signingConfigs {
+        debug {
+            // IMPORTANTE: Ruta relativa DESDE LA RAÍZ del proyecto
+            storeFile rootProject.file("keystores/debug.keystore")
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: "android"
+            keyAlias System.getenv("KEY_ALIAS_DEBUG") ?: "androiddebugkey"
+            keyPassword System.getenv("KEY_PASSWORD") ?: "android"
+        }
+        release {
+            storeFile rootProject.file("keystores/release.keystore")
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: "release123"
+            keyAlias System.getenv("KEY_ALIAS_RELEASE") ?: "releasekey"
+            keyPassword System.getenv("KEY_PASSWORD") ?: "release123"
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            signingConfig signingConfigs.debug
+            applicationIdSuffix ".debug"
+            versionNameSuffix "-DEBUG"
+            
+            // Para desarrollo
+            buildConfigField "String", "API_URL", "\"https://api.dev.example.com/\""
+            resValue "string", "app_name", "MyApp Dev"
+        }
+        
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            
+            // Para producción
+            buildConfigField "String", "API_URL", "\"https://api.example.com/\""
+            resValue "string", "app_name", "MyApp"
+            
+            // Optimizaciones (opcional)
+            shrinkResources false // Cambiar a true para producción
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+            returnDefaultValues = true
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    
+    // Testing dependencies
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockito:mockito-core:5.11.0'
+    testImplementation 'androidx.test:core:1.5.0'
+    testImplementation 'org.robolectric:robolectric:4.11.1'
+    
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

@@ -1,0 +1,16 @@
+name: Android Release
+
+on:
+  push:
+    branches: [ release/* ]
+
+jobs:
+  android:
+    uses: organization-desa/android-cicd-template/.github/workflows/android-release-template.yml@main
+    with:
+      java_version: "17"
+    secrets:
+      RELEASE_KEYSTORE_BASE64: ${{ secrets.RELEASE_KEYSTORE_BASE64 }}
+      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+      KEY_ALIAS_RELEASE: ${{ secrets.KEY_ALIAS_RELEASE }}
+      KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
