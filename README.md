@@ -1,6 +1,6 @@
 # app-mobile-reto
 
-Aplicación Android nativa en Java con pruebas unitarias y CI/CD integrado
+Aplicación Android nativa en Java con pruebas unitarias y CI/CD integrado.
 
 ## 🚀 Características
 
