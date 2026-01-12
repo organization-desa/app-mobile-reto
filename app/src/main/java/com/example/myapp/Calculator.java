@@ -10,6 +10,10 @@ public class Calculator {
 
     String supabase_secret_key = "-----BEGIN PRIVATE KEY-----";
 
+    String subscription_key = "927c4c89ea6e47e2bebf02ba4ed910ab";
+
+    String key = "7voVWXdf67gfdgdfg67667dsfGReT5498fdkl";
+
     public int add(int a, int b) {
         return a + b;
     }
