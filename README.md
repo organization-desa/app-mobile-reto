@@ -69,3 +69,5 @@ v1.1.1
 - ✅ Merge rápido a main
 - ✅ Automatización mediante GitHub Actions
 
+
+
