@@ -11,9 +11,6 @@ import static org.mockito.Mockito.*;
 @RunWith(org.junit.runners.JUnit4.class)
 public class CalculatorTest {
     
-    public String token = "fdsfdsfdsfdsf3232";
-    public String password = "admin";
-    
     @Test
     public void testAdd() {
         Calculator calculator = new Calculator();

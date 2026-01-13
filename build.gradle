@@ -6,3 +6,6 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+group = 'com.example.myapp'
+version = '1.0.2'

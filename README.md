@@ -13,59 +13,81 @@ Aplicación Android nativa en Java con pruebas unitarias y CI/CD integrado.
 
 ## 📁 Branching Strategy — Trunk-Based Development (TBD)
 
-El objetivo es mantener una sola rama principal (trunk) siempre estable y desplegable, reduciendo la complejidad del branching y mejorando la velocidad de entrega.
+Mantener una rama principal (trunk) estable y desplegable, reduciendo la complejidad del branching y mejorando la velocidad de entrega.
 
-🌲 Ramas principales
-Rama	Propósito
-main	Trunk. Rama principal. Siempre estable, testeada y lista para release
-
-🚫 No se permite hacer commits directos a main.
-
-🌱 Ramas de trabajo (corta duración)
-
-Las ramas de trabajo deben ser pequeñas y de vida corta (horas o pocos días) y siempre integrarse a main mediante Pull Request.
+- 🚫 No se permite commits directos a main, solo atraves de PRs.
+- 🌱 Ramas de trabajo de corta duración.
 
 Convenciones de nombres
 feature/<descripcion-corta>
 bugfix/<descripcion-corta>
 hotfix/<descripcion-corta>
 
-Ejemplos
-feature/login-biometrico
-feature/push-notifications
-bugfix/crash-on-startup
-hotfix/release-signing
-
 🚀 Releases
-
-Los releases se generan desde main, usando una de las siguientes opciones:
-
-Release branches (temporales)
+Los releases se generan desde main, usando una de las siguientes nomeclaturas:
 release/1.0.0
 release/1.1.0
 release/1.1.1
 
-Las ramas release/* existen solo mientras se prepara el release
-
-Deben eliminarse después del despliegue
+Convenciones de versiones (major.minor.patch)
+1.1.1
+MAJOR: Cambios incompatibles con versiones anteriores.
+MINOR: Nuevas funcionalidades compatibles hacia atrás.
+PATCH: Correcciones de bugs sin cambiar funcionalidad.
 
 Cuando se hacen los despliegues a producción se usan — Tags
 v1.0.0
 v1.1.0
 v1.1.1
 
+## 📁 Generation certificate / signing keys
 
-❌ Lo que NO se permite
+Tenemos un script linux generate-keystores.sh encargado de generar los certificados dummy.
+Estos certificados se almacena como secret del repositorio GitHub.
 
-- ✅ Ramas persistentes como develop, staging, qa
-- ✅ Commits directos a main
-- ✅ Ramas de larga duración
-- ✅ Releases desde ramas que no sean main o release/*
+## 📁 Setup Local
 
-🛠️ Buenas prácticas recomendadas
+**Pre-Requisito:**
 
-- ✅ Commits pequeños y frecuentes
-- ✅ Pull Requests enfocados y revisables
-- ✅ Merge rápido a main
-- ✅ Automatización mediante GitHub Actions
+* Java 17
+* Packages de android:
+    - platforms;android-34
+    - build-tools;34.0.0
+    - platform-tools
+    - ndk;25.2.9519653
+    - cmake;3.22.1
 
+* **Ejecuta unit test**
+
+    ./gradlew testDebugUnitTest
+    
+* **Build apk en modo debug**
+
+    ./gradlew assembleDebug \
+    -Pandroid.injected.signing.store.file=keystores/debug.keystore \
+    -Pandroid.injected.signing.store.password=${{ KEYSTORE_PASSWORD }} \
+    -Pandroid.injected.signing.key.alias=${{ KEY_ALIAS_DEBUG }} \
+    -Pandroid.injected.signing.key.password=${{ KEY_PASSWORD }}
+
+* **Build apk en modo release**
+
+    ./gradlew assembleRelease 
+    -Pandroid.injected.signing.store.file=keystores/release.keystore \
+    -Pandroid.injected.signing.store.password=${{ KEYSTORE_PASSWORD }} \
+    -Pandroid.injected.signing.key.alias=${{ KEY_ALIAS_RELEASE }} \
+    -Pandroid.injected.signing.key.password=${{ KEY_PASSWORD }}
+
+
+## 📁 Obtener APK generado
+
+Dentro de cada workflow run se encuentra archivado el apk generado
+
+**Android CI:**         Genera el apk para debug (Al hacer push a main).
+
+**Android Release:**    Genera el apk para release.
+
+**Nomeclatura del nombre:**
+
+**Para DEV:**       Nombre del proyecto-debug-build.apk
+
+**Para QA y PRD:**  Nombre del proyecto-release-build-tag.apk
