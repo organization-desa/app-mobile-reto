@@ -1,0 +1,11 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"                 # raíz del proyecto donde está build.gradle
+    schedule:
+      interval: "daily"            # revisa dependencias todos los días
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+    allow:
+      - dependency-type: "all"     # incluye dependencies y devDependencies
