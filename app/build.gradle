@@ -17,6 +17,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    tasks.register("printVersionName") {
+        doLast {
+            android.defaultConfig.versionName?.let {
+                println(it)
+            }
+        }
+    }
+
     buildFeatures {
         viewBinding true
         buildConfig true  // Esta línea es la que falta
