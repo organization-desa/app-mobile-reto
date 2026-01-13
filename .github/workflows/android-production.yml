@@ -5,6 +5,7 @@ name: Android Production
 jobs:
   android:
     uses: organization-desa/android-cicd-template/.github/workflows/android-production-template.yml@main
+    if: startsWith(github.ref, 'refs/heads/release/')
     with:
       java_version: "17"
     secrets:
