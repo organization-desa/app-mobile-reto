@@ -12,9 +12,17 @@ android {
         minSdk 24
         targetSdk 34
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    tasks.register("printVersionName") {
+        doLast {
+            android.defaultConfig.versionName?.let {
+                println(it)
+            }
+        }
     }
 
     buildFeatures {
@@ -91,6 +99,3 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
-
-group = 'com.example.myapp'
-version = '1.0.1'

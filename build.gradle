@@ -7,5 +7,14 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-group = 'com.example.myapp'
-version = '1.0.2'
+/*
+android.applicationVariants.all { variant ->
+    variant.outputs.all { output ->
+        def appName = "app-mobile-reto"
+        def version = variant.versionName
+        def buildType = variant.buildType.name
+
+        outputFileName = "${appName}-${version}-${buildType}.apk"
+    }
+}
+*/
